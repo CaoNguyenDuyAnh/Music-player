@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <title>Music App</title>
+</head>
+<body>
+    <header>
+        
+        <div class="menu_side">
+            <div class="menu_logo">
+                <img src="./img/Logo.png" alt="">
+            </div>
+            <div class="icon-menu">
+                <ul class="item-menu">
+                    <li class="active-menu">
+                        <i class="fas fa-music icon-menu_item "></i>
+                        Cá nhân
+                    </li>
+                    <li>
+                        <i class="fas fa-compact-disc icon-menu_item"></i>
+                        Top 100
+                    </li>
+                    <li>
+                        <i class="fas fa-icons icon-menu_item"></i>
+                        Thể loại
+                    </li>
+                    <li>
+                        <i class="fas fa-star icon-menu_item"></i>
+                        Top 100
+                    </li>
+                    <li>
+                        <i class="fas fa-video icon-menu_item"></i>
+                        MV
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+
+        
+        <div class="song_side">
+            <div class="header_song-side">
+                <button class="header_button-back">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button class="header_button-disable">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+                <div class="header_search">
+                    <i class="fas fa-search icon-search_header"></i>
+                    <input type="text" placeholder="Nhập tên bài hát, nghệ sĩ hoặc MV..." class="header_search-input">
+                </div>
+                <div class="account">
+                    <div class="account-item">
+                        <img src="./img/user.png" alt="" class="avatar">
+                        <div style="margin: auto">Duy Anh</div>
+                        <i class="fas fa-caret-down" style="margin: auto"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="app__header-user">
+                <img src="./img/user.png" class="avatar-user">
+                <span class="name-user">Duy Anh</span>
+            </div>
+            <div class="app__content">
+                <div class="app__content-navbar">
+                    <ul class="content-container-menu">
+                        <li class="content-container-item item-active">BÀI HÁT</li>
+                        <li class="content-container-item">PLAYLIST</li>
+                        <li class="content-container-item">ALBUM</li>
+                        <li class="content-container-item">MV</li>
+                        <li class="content-container-item">NGHỆ SĨ</li>
+                    </ul>
+                </div>
+                <div class="app__content-container">
+                    <div class="content-header">
+                        <a href="#" class="content-header-tittle">Bài hát</a>
+                        <div class="content-header-action">
+                            <button class="header-action-playall">
+                                <i class="fas fa-play" style="margin-right:6px"></i>
+                                Phát tất cả
+                            </button>
+                        </div>
+                    </div>
+                    <div class="play__list">
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="master_play ">
+            <div class ="song-playing" >
+                <div class="thumb-and-body">
+                    <div class="thumb" style= "background-image:url('./img/cuoithoi.jpg')"></div>
+                    <div class="body-playing">
+                        <h3 class="title">Cưới thôi</h3>
+                        <p class="author-playing">Masew</p>
+                    </div>
+                    <div class="like">
+                        <i class="far fa-heart"></i>
+                    </div>
+                </div>
+                
+                <div class="btnAndSeek ">
+                    <div class="control">
+                        <div class="btn btn-repeat">
+                            <i class="fas fa-redo"></i>
+                        </div>
+                        <div class="btn btn-prev">
+                            <i class="fas fa-step-backward"></i>
+                        </div>
+                        <div class="btn btn-toggle-play ">
+                            <i class="fas fa-pause icon-pause"></i>
+                            <i class="fas fa-play icon-play"></i>
+                        </div>
+                        <div class="btn btn-next">
+                            <i class="fas fa-step-forward"></i>
+                        </div>
+                        <div class="btn btn-random">
+                            <i class="fas fa-random"></i>
+                        </div>
+                        
+                    </div>
+                    <input id="progress-seek" class="progress" type="range" value="0" step="1" min="0" max="100">
+                    
+                </div>
+                <div class="iconAndVolume">
+                    <i class="icon-btn fas fa-microphone"></i>
+                    <i class="icon-btn fas fa-bars" style="margin-left: 20px"></i>
+                    <i class="icon-btn fas fa-volume-up volume-icon"></i>
+                    <input id="progress-volume" class="progress" type="range" value="0" step="1" min="0" max="100">
+                </div>
+                <audio id="audio" src=""></audio>
+            </div>
+
+        </div>
+    </header>
+    <script src="app.js"></script>
+</body>
+</html>
