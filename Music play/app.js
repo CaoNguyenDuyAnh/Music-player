@@ -10,6 +10,9 @@ const player = $('.btnAndSeek')
 const progress = $('#progress-seek')
 const nextBtn = $('.btn-next')
 const prevBtn = $('.btn-prev')
+const ramdomBtn = $('.btn-random')
+const repeatBtn = $('.btn-repeat')
+const playlist = $('.play__list')
 const app = {
     currentIndex : 0,
     isPlaying: false,
@@ -62,8 +65,10 @@ const app = {
     render: function() {
         const htmls = this.songs.map((song, index) =>{
             return`
-                <div class="play__list-song">
+                <div class="play__list-song ${index === this.currentIndex ? 'active' :''}" data-index="${index}">
                     <div class="play__list-song-info">
+                        <div class="number-song" style="margin: auto; padding: 0 10px 0 20px;">${index +1}</div>
+                        <img class="active-playing" src="./img/output-onlinegiftools.gif" >
                         <div class="thumb" style= "background-image:url('${song.image}')"></div>
                         <div class="body-song">
                             <h3 class="title">${song.name}</h3>
@@ -96,13 +101,22 @@ const app = {
                 audio.play()
             }
         }
+        const cdThumbAnimate = cdThumb.animate([
+            { transform: 'rotate(360deg)'}
+        ], {
+            duration: 10000, 
+            iterations: Infinity
+        })
+        cdThumbAnimate.pause()
         audio.onplay = function() {
             _this.isPlaying = true
             player.classList.add('playing')
+            cdThumbAnimate.play()
         }
         audio.onpause = function() {
             _this.isPlaying = false
             player.classList.remove('playing')
+            cdThumbAnimate.pause()
         }
         audio.ontimeupdate = function(){
             const progressPercent = Math.floor(audio.currentTime / audio.duration *100)
@@ -113,13 +127,54 @@ const app = {
                     audio.currentTime = seekTime
         }
         nextBtn.onclick = function(){
-            _this.nextSong()
+            if(_this.isRamdom) {
+                _this.playRamdomSong()
+            } else {
+                _this.nextSong()
+            }
             audio.play()
+            _this.render()
         }
         prevBtn.onclick = function(){
-            _this.prevSong()
+            if(_this.isRamdom) {
+                _this.playRamdomSong()
+            } else {
+                _this.prevSong()
+            }
             audio.play()
+            _this.render()
         }
+        ramdomBtn.onclick = function(e){
+            _this.isRamdom = !_this.isRamdom
+            ramdomBtn.classList.toggle('active', _this.isRamdom)
+        }
+        repeatBtn.onclick = function(e){
+            _this.isRepeat = !_this.isRepeat
+            repeatBtn.classList.toggle('active', _this.isRepeat)
+        }
+        audio.onended =function() {
+            if(_this.isRepeat) {
+                audio.play()
+            } else {
+                nextBtn.click()
+            }
+        }
+        playlist.onclick = function(e) {
+            const songNode = e.target.closest('.play__list-song:not(.active)')
+            if(songNode || e.target.closest('.play__list-song-option')){
+                if(songNode){
+                    _this.currentIndex = Number(songNode.dataset.index)
+                    _this.loadCurrentSong()
+                    _this.render()
+                    audio.play()
+                }
+
+                if(e.target.closest('.play__list-song-option')){
+
+                }
+            }
+        }
+
     },
     loadCurrentSong: function() {
 
@@ -140,6 +195,14 @@ const app = {
         if(this.currentIndex < 0){
             this.currentIndex = this.songs.length - 1
         }
+        this.loadCurrentSong()
+    },
+    playRamdomSong: function(){
+        let newIndex
+        do {
+            newIndex = Math.floor(Math.random() * this.songs.length)
+        } while (newIndex === this.currentIndex)
+        this.currentIndex = newIndex
         this.loadCurrentSong()
     },
     start: function() {

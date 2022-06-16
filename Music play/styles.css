@@ -267,7 +267,7 @@ header .item-playlist {
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid #718197;
-    padding: 20px 0;
+    padding: 15px 0;
     margin: 0 5px;
 }
 
@@ -311,6 +311,29 @@ header .item-playlist {
     font-size: 13px;
     color: #97a3b3;
 }
+
+.play__list .play__list-song.active {
+    
+    background-color: #344b6b;
+    border-radius: 6px;
+   
+}
+
+.play__list .play__list-song.active .number-song {
+    display: none;
+}
+
+.play__list .play__list-song.active .active-playing {
+    display: block;
+}
+
+.active-playing {
+    display: none;
+    width: 30px;
+    height: 30px;
+    margin: auto -3px auto 10px;
+}
+
 
 .icon-playlist {
     margin: auto 20px ;
@@ -472,4 +495,10 @@ header .item-playlist {
     background-color: #fff;
     cursor: pointer;
 }
+
+.control .btn.active {
+    color: #6e8ffb;
+}
+
+
 
