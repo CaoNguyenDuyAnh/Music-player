@@ -59,15 +59,21 @@
                 <div class="account">
                     <div class="account-item">
                         <img src="./img/user.png" alt="" class="avatar">
-                        <div style="margin: auto">Duy Anh</div>
+                        <div id="name-avatar" style="margin: auto"></div>
                         <i class="fas fa-caret-down" style="margin: auto"></i>
                     </div>
+                    
+                </div>
+                <div class="loginAndRegist ">
+                    <div href="" class="login">Đăng nhập</div>
+                    <div href="" class="logup">Đăng ký</div>
                 </div>
             </div>
             <div class="app__header-user">
                 <img src="./img/user.png" class="avatar-user">
                 <span class="name-user">Duy Anh</span>
             </div>
+            
             <div class="app__content">
                 <div class="app__content-navbar">
                     <ul class="content-container-menu">
@@ -258,16 +264,25 @@
             var username = document.getElementById("username-login").value;
             var password = document.getElementById("password-login").value;
             const modal = document.querySelector('.modal')
+            const loginAndRegist = document.querySelector('.loginAndRegist')
+            const account = document.querySelector('.account')
             var user = localStorage.getItem(username);
             var data = JSON.parse(user);
             if (!user) {
-                alert("Đăng nhập thất bại");
+                alert("Bạn đã nhập sai tên hoặc sai mật khẩu");
             } else if (
                 username == data.username &&
                 password == data.password
             ) {
                 alert("Đăng nhập thành công");
-                modal.classList.add('none')
+                modal.classList.add('none');
+                modal.classList.remove('open');
+                loginAndRegist.classList.add('none');
+                account.classList.add('open');
+                document.getElementById("name-avatar").innerHTML = username
+            }
+            else {
+                alert("Bạn đã nhập sai tên hoặc sai mật khẩu");
             }
         }
     </script>

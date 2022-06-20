@@ -17,6 +17,9 @@ const switchBtn = $('.auth-form__switch')
 const switchRegist = $('.auth-form__switch-regist')
 const regist = $('.auth-form')
 const login = $('.auth-form-login')
+const openLogin = $('.login')
+const openLogup = $('.logup')
+const modal = $('.modal')
 const app = {
     currentIndex : 0,
     isPlaying: false,
@@ -180,19 +183,26 @@ const app = {
                 }
             }
         }
+
+        openLogin.onclick = function(){
+            modal.classList.add('open')
+            login.classList.add('open')
+            regist.classList.add('remove')
+        }
+        openLogup.onclick = function(){
+            modal.classList.add('open')
+            login.classList.remove('open')
+        }
+        
         switchBtn.onclick = function() {
-            _this.isRegist = ! _this.isRegist
-            regist.classList.toggle('remove', _this.isRegist)
+            regist.classList.add('remove')
             
-            _this.isLogin = ! _this.isLogin
-            login.classList.toggle('open', _this.login)
+            login.classList.add('open')
         }
         switchRegist.onclick = function() {
-            _this.isRegist = ! _this.isRegist
-            regist.classList.toggle('remove', _this.isRegist)
+            regist.classList.remove('remove')
             
-            _this.isLogin = ! _this.isLogin
-            login.classList.toggle('open', _this.login)
+            login.classList.remove('open')
         }
 
 

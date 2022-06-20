@@ -61,6 +61,7 @@ header .item-playlist {
 }
 
 .account {
+    display: none;
     height: 26px;
     margin: 28px;
     background-color: #fff;
@@ -72,6 +73,42 @@ header .item-playlist {
     border-bottom-right-radius: 25px;
     border-top-right-radius: 25px;
     margin-left: auto;
+}
+
+.account.open{
+    display: block;
+}
+
+.loginAndRegist {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.loginAndRegist.none {
+    display: none;
+}
+
+.login {
+    width: 100px;
+    height: 32px;
+    color: #fff;
+    text-decoration: none;
+    padding: 0 10px;
+    font-size: 14px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.logup {
+    width: 100px;
+    height: 32px;
+    color: #fff;
+    text-decoration: none;
+    padding: 0 10px;
+    font-size: 14px;
+    align-items: center;
+    cursor: pointer;
 }
 
 .header_song-side {
@@ -169,6 +206,7 @@ header .item-playlist {
 .account-item {
     display: flex;
     height: 26px;
+    
 }
 .avatar-user {
     height: 160px;
@@ -507,12 +545,12 @@ header .item-playlist {
     right: 0;
     bottom: 0;
     left: 0;
-    display: flex;
+    display: none;
     animation: fadeIn linear 0.1s ;
 }
 
-.modal.none {
-    display: none;
+.modal.open {
+    display: flex;
 }
 
 @keyframes fadeIn {
@@ -543,6 +581,10 @@ header .item-playlist {
 .auth-form {
     width: 500px;
     overflow: hidden;
+}
+
+.auth-form {
+    display: block;
 }
 
 .auth-form.remove {
