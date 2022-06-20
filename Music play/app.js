@@ -13,11 +13,17 @@ const prevBtn = $('.btn-prev')
 const ramdomBtn = $('.btn-random')
 const repeatBtn = $('.btn-repeat')
 const playlist = $('.play__list')
+const switchBtn = $('.auth-form__switch')
+const switchRegist = $('.auth-form__switch-regist')
+const regist = $('.auth-form')
+const login = $('.auth-form-login')
 const app = {
     currentIndex : 0,
     isPlaying: false,
     isRamdom: false,
     isRepeat: false,
+    isRegist: false,
+    isLogin: true,
     songs: [
         {
             name: 'Cưới thôi',
@@ -174,6 +180,21 @@ const app = {
                 }
             }
         }
+        switchBtn.onclick = function() {
+            _this.isRegist = ! _this.isRegist
+            regist.classList.toggle('remove', _this.isRegist)
+            
+            _this.isLogin = ! _this.isLogin
+            login.classList.toggle('open', _this.login)
+        }
+        switchRegist.onclick = function() {
+            _this.isRegist = ! _this.isRegist
+            regist.classList.toggle('remove', _this.isRegist)
+            
+            _this.isLogin = ! _this.isLogin
+            login.classList.toggle('open', _this.login)
+        }
+
 
     },
     loadCurrentSong: function() {
@@ -221,4 +242,6 @@ const app = {
     
 }
 app.start()
+
+
 
