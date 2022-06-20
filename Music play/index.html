@@ -71,7 +71,7 @@
             </div>
             <div class="app__header-user">
                 <img src="./img/user.png" class="avatar-user">
-                <span class="name-user">Duy Anh</span>
+                <span id="name-user" class="name-user"></span>
             </div>
             
             <div class="app__content">
@@ -134,14 +134,15 @@
                         </div>
                         
                     </div>
-                    <input id="progress-seek" class="progress" type="range" value="0" step="1" min="0" max="100">
+                    <input id="progress-seek" class="progress" type="range" value="5" step="1" min="0" max="100">
                     
                 </div>
                 <div class="iconAndVolume">
                     <i class="icon-btn fas fa-microphone"></i>
                     <i class="icon-btn fas fa-bars" style="margin-left: 20px"></i>
+                    <i class="icon-btn fas fa-volume-mute muted-icon" ></i>
                     <i class="icon-btn fas fa-volume-up volume-icon"></i>
-                    <input id="progress-volume" class="progress" type="range" value="0" step="1" min="0" max="100">
+                    <input id="progress-volume" class="progress" type="range" value="100" step="1" min="0" max="100">
                 </div>
                 <audio id="audio" src=""></audio>
             </div>
@@ -280,11 +281,23 @@
                 loginAndRegist.classList.add('none');
                 account.classList.add('open');
                 document.getElementById("name-avatar").innerHTML = username
+                document.getElementById("name-user").innerHTML = username
             }
             else {
                 alert("Bạn đã nhập sai tên hoặc sai mật khẩu");
             }
         }
+        const modalContainer = document.querySelector('.modal__inner')
+
+        function hideLogin(){
+            modal.classList.add('none')
+            modal.classList.remove('open')
+        }
+        modal.addEventListener('click', hideLogin)
+        modalContainer.addEventListener('click', function(event){
+                event.stopPropagation()
+        })
+
     </script>
 </body>
 </html>

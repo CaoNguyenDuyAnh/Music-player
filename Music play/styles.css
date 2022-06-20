@@ -365,6 +365,10 @@ header .item-playlist {
     display: block;
 }
 
+.play__list .play__list-song.active .active-playing.none {
+    display: none;
+}
+
 .active-playing {
     display: none;
     width: 30px;
@@ -477,6 +481,8 @@ header .item-playlist {
     color: #2f425b;
   }
 
+
+
 .iconAndVolume {
     margin: auto 40px;
     display: flex;
@@ -486,6 +492,11 @@ header .item-playlist {
 .volume-icon {
     margin: 0 20px;
 }
+
+.volume-icon.none {
+    display: none;
+}
+
 #progress-volume {
     margin: auto;
 }
@@ -736,4 +747,13 @@ header .item-playlist {
 
 .auth-form__aside {
     display: flex;
+}
+
+.iconAndVolume .muted-icon {
+    margin: 0 20px;
+    display: none;
+}
+
+.iconAndVolume .muted-icon.open {
+    display: block;
 }

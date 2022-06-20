@@ -20,10 +20,16 @@ const login = $('.auth-form-login')
 const openLogin = $('.login')
 const openLogup = $('.logup')
 const modal = $('.modal')
+const playAll = $('.header-action-playall')
+const volumelistener = $('#progress-volume')
+const songPlaying = $('.active-playing')
+const volumeIcon = $('.volume-icon')
+const muted = $('.muted-icon')
+
 const app = {
     currentIndex : 0,
     isPlaying: false,
-    isRamdom: false,
+    isRamdom: false,    
     isRepeat: false,
     isRegist: false,
     isLogin: true,
@@ -85,7 +91,7 @@ const app = {
                         </div>
                     </div>
                     <div class="play__list-song-option">
-                        <i class="far fa-heart icon-playlist"></i> 
+                        <i class="fas fa-heart"></i>
                         <i class="fas fa-ellipsis-h icon-playlist"></i>
                     </div>
                 </div>
@@ -121,6 +127,7 @@ const app = {
             _this.isPlaying = true
             player.classList.add('playing')
             cdThumbAnimate.play()
+
         }
         audio.onpause = function() {
             _this.isPlaying = false
@@ -132,8 +139,8 @@ const app = {
             progress.value = progressPercent
         }
         progress.onchange = function(e) {
-                    const seekTime = audio.duration / 100 * e.target.value
-                    audio.currentTime = seekTime
+            const seekTime = audio.duration / 100 * e.target.value
+            audio.currentTime = seekTime
         }
         nextBtn.onclick = function(){
             if(_this.isRamdom) {
@@ -170,7 +177,8 @@ const app = {
         }
         playlist.onclick = function(e) {
             const songNode = e.target.closest('.play__list-song:not(.active)')
-            if(songNode || e.target.closest('.play__list-song-option')){
+            const optionNode = e.target.closest('.play__list-song-option')
+            if(songNode || !optionNode){
                 if(songNode){
                     _this.currentIndex = Number(songNode.dataset.index)
                     _this.loadCurrentSong()
@@ -178,7 +186,7 @@ const app = {
                     audio.play()
                 }
 
-                if(e.target.closest('.play__list-song-option')){
+                if(optionNode){
 
                 }
             }
@@ -191,7 +199,9 @@ const app = {
         }
         openLogup.onclick = function(){
             modal.classList.add('open')
+            modal.classList.remove('none')
             login.classList.remove('open')
+            regist.classList.remove('remove')
         }
         
         switchBtn.onclick = function() {
@@ -205,6 +215,23 @@ const app = {
             login.classList.remove('open')
         }
 
+        playAll.onclick = function(){
+            audio.play()
+        }
+        volumelistener.onchange = function(e) {
+            audio.volume = e.currentTarget.value /200
+        }
+        volumeIcon.onclick =function(){
+            audio.volume = 0
+            muted.classList.add('open')
+            volumeIcon.classList.add('none')
+        }
+
+        muted.onclick = function() {
+            audio.volume = 1
+            muted.classList.remove('open')
+            volumeIcon.classList.remove('none')
+        }
 
     },
     loadCurrentSong: function() {
@@ -236,6 +263,7 @@ const app = {
         this.currentIndex = newIndex
         this.loadCurrentSong()
     },
+
     start: function() {
         //Định nghĩa các thuộc tính cho object
         this.defineProperties()
