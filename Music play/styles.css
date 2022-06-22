@@ -38,6 +38,15 @@ header .item-menu {
     padding-top: 30px;
 }
 
+header .item-menu a {
+    font-size: 16px;
+    list-style: none;
+    padding-top: 30px;
+    color: #fff;
+    text-decoration: none;
+    margin-left: -10px;
+}
+
 header .item-playlist {
     font-size: 14px;
     padding: 20px;
@@ -273,6 +282,10 @@ header .item-playlist {
     border-bottom: 1px solid #718197;
 }
 
+.content-header.find-padding{
+    padding-top: 30px;
+}
+
 .content-header-tittle {
     text-decoration: none;
     color: #fff;
@@ -298,6 +311,14 @@ header .item-playlist {
 
 .play__list {
     margin: 0 65px;
+}
+
+.play__list1 {
+    margin: 0 65px;
+}
+
+.play__list.hide {
+    display: none;
 }
 
 .play__list-song {
@@ -355,6 +376,11 @@ header .item-playlist {
     background-color: #344b6b;
     border-radius: 6px;
    
+}
+
+
+.play__list-song.hide {
+    display: none;
 }
 
 .play__list .play__list-song.active .number-song {

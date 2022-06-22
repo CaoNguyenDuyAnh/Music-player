@@ -13,6 +13,7 @@ const prevBtn = $('.btn-prev')
 const ramdomBtn = $('.btn-random')
 const repeatBtn = $('.btn-repeat')
 const playlist = $('.play__list')
+const playlist1 =$('.play__list1')
 const switchBtn = $('.auth-form__switch')
 const switchRegist = $('.auth-form__switch-regist')
 const regist = $('.auth-form')
@@ -25,6 +26,8 @@ const volumelistener = $('#progress-volume')
 const songPlaying = $('.active-playing')
 const volumeIcon = $('.volume-icon')
 const muted = $('.muted-icon')
+const song1 = document.querySelector('.play__list-song')
+const searchBar = document.getElementById('InputFind')
 
 const app = {
     currentIndex : 0,
@@ -85,12 +88,16 @@ const app = {
                         <div class="number-song" style="margin: auto; padding: 0 10px 0 20px;">${index +1}</div>
                         <img class="active-playing" src="./img/output-onlinegiftools.gif" >
                         <div class="thumb" style= "background-image:url('${song.image}')"></div>
-                        <div class="body-song">
+                        <div id="myDiv" class="body-song">
                             <h3 class="title">${song.name}</h3>
                             <p class="author">${song.singer}</p>
                         </div>
                     </div>
                     <div class="play__list-song-option">
+                        <a href="${song.path}" download="">
+                                <i class="fa fa-download " style="padding-right:2px;border:none;cursor:pointer; margin-right:15px"></i>
+                            
+                         </a>
                         <i class="fas fa-heart"></i>
                         <i class="fas fa-ellipsis-h icon-playlist"></i>
                     </div>
@@ -100,6 +107,9 @@ const app = {
         $('.play__list').innerHTML = htmls.join('')
         
     },
+
+    
+    
     defineProperties : function(){
         Object.defineProperty(this, 'currentSong', {
             get: function(){
@@ -107,6 +117,7 @@ const app = {
             }
         })
     }, 
+    
     handleEvents:function(){
         const _this = this
         playBtn.onclick = function (){
@@ -164,6 +175,10 @@ const app = {
             _this.isRamdom = !_this.isRamdom
             ramdomBtn.classList.toggle('active', _this.isRamdom)
         }
+        ramdomBtn.onclick = function(e){
+            _this.isRamdom = !_this.isRamdom
+            ramdomBtn.classList.toggle('active', _this.isRamdom)
+        }
         repeatBtn.onclick = function(e){
             _this.isRepeat = !_this.isRepeat
             repeatBtn.classList.toggle('active', _this.isRepeat)
@@ -176,6 +191,23 @@ const app = {
             }
         }
         playlist.onclick = function(e) {
+            const songNode = e.target.closest('.play__list-song:not(.active)')
+            const optionNode = e.target.closest('.play__list-song-option')
+            if(songNode || !optionNode){
+                if(songNode){
+                    _this.currentIndex = Number(songNode.dataset.index)
+                    _this.loadCurrentSong()
+                    _this.render()
+                    audio.play()
+                }
+
+                if(optionNode){
+
+                }
+            }
+        }
+
+        playlist1.onclick = function(e) {
             const songNode = e.target.closest('.play__list-song:not(.active)')
             const optionNode = e.target.closest('.play__list-song-option')
             if(songNode || !optionNode){
@@ -232,15 +264,52 @@ const app = {
             muted.classList.remove('open')
             volumeIcon.classList.remove('none')
         }
+        searchBar.addEventListener('keyup', (e) => {
+            const value = e.target.value.toLowerCase();
+            console.log(value)
+            const filterSong = _this.songs.filter((songs) => {
+                return  (
+                     (songs.name.toLowerCase().includes(value) ||
+                    songs.singer.toLowerCase().includes(value))
+                );
+                
+            });
+            const htmls = filterSong.map((songs,newIndex) =>{
+                return`
+                    <div class="play__list-song "  ${newIndex === this.index ? 'active' :''}" data-index="${newIndex}">
+                        <div class="play__list-song-info">
+                            <img class="active-playing" src="./img/output-onlinegiftools.gif" >
+                            <div class="thumb" style= "background-image:url('${songs.image}')"></div>
+                            <div id="myDiv" class="body-song">
+                                <h3 class="title">${songs.name}</h3>
+                                <p class="author">${songs.singer}</p>
+                            </div>
+                        </div>
+                        <div class="play__list-song-option">
+                            <a href="${songs.path}" download="">
+                                <i class="fa fa-download " style="padding-right:2px;border:none;cursor:pointer; margin-right:15px"></i>
+                             </a>
+                            <i class="fas fa-heart"></i>
+                            <i class="fas fa-ellipsis-h icon-playlist"></i>
+                        </div>
+                    </div>
+                `   
+            })
+            $('.play__list1').innerHTML = htmls.join('')
+
+        });
+
+        
+        
 
     },
     loadCurrentSong: function() {
-
         heading.textContent = this.currentSong.name
         cdThumb.style.backgroundImage = `url('${this.currentSong.image}')`
         audio.src = this.currentSong.path
         authorPlaying.textContent = this.currentSong.singer
     },
+    
     nextSong: function(){
         this.currentIndex++
         if(this.currentIndex >= this.songs.length){
@@ -263,6 +332,7 @@ const app = {
         this.currentIndex = newIndex
         this.loadCurrentSong()
     },
+    
 
     start: function() {
         //Định nghĩa các thuộc tính cho object
@@ -280,6 +350,7 @@ const app = {
     
 }
 app.start()
+
 
 
 
